@@ -16,7 +16,7 @@ My scripts are in a private repo, so this is the shape of the skill rather than 
 - **State files** on my PC in `<MONEY FOLDER>`: the running tally of the current cycle and the closed cycles, with checksums. The API token is a `.secret` file there.
 
 ## Setting up in a run
-1. **Scripts**: use an existing clone if the run started with one; else `add_repo` if available; else clone with the read-only GitHub token (`.secret` file, download link only, fed to git through a credential helper that reads the file, never on a command line). Run the tests. If any fail or the repo can't be reached, give no money figures and say so in one line.
+1. **Scripts**: in a normal chat, `add_repo`. Scheduled runs have no GitHub connector, so there clone with the read-only GitHub token (`.secret` file, download link only, fed to git through a credential helper that reads the file, never on a command line). Run the tests. If any fail or the repo can't be reached, give no money figures and say so in one line.
 2. **Files in and out**: `create_download_link` + `curl -sS -o FILE URL`; back with `create_upload_link` + `curl -sS -T FILE URL`. Never hand-edit a state file.
 3. **Bank data**: `fetch.py` with the API token from `secret/`, then `ingest.py`, so transactions never pass through the chat. Fall back to the connector only if the API fails, saving its pages exactly as returned.
 

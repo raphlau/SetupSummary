@@ -118,11 +118,11 @@ Day to day, money only shows up as alerts; the full analysis is monthly, by pay 
 4. Paste the custom instructions into your profile preferences.
 5. Make the skills: paste each template into a chat and ask Claude to turn it into a skill, then save it from the card it shows.
 6. Use it in normal chats for a week or two so the knowledge base fills up and the skills get corrected.
-7. Then create the routines, one at a time, from a chat that already has everything they need attached (see the first lesson below).
+7. Then create the routines, one at a time. If they need a private repo, set up the read-only token first (see the first lesson below).
 
 ## Lessons learned
 
-- **Scheduled tasks inherit GitHub repos from the chat that created them, at the moment they're created.** Editing a task later can't add one. My workaround: a fine-grained, read-only GitHub token (one repo, Contents read) saved as a `.secret` file, which the skill uses to clone.
+- **Scheduled runs don't get a GitHub connector**, so a routine can't clone a private repo by itself. My workaround: a fine-grained, read-only GitHub token (one repo, Contents read) saved as a `.secret` file, which the skill uses to clone.
 - **The automatic permission check in scheduled runs refused the token downloads** at first (inconsistently, run to run), and it also refused Claude's own attempt to add an approval to the prompts. What worked: I explicitly told Claude in a live chat to add a "Tokens I've approved for this task" paragraph to each prompt, naming the files and how to fetch them. The next runs got the tokens fine.
 - **Reports arrived twice** when a routine sent its report as a message and then again as its final reply. Every prompt now says: send the report once, as the final reply; message only to report a problem that stops the run.
 - **Don't let reports refer to internal IDs** ("A11") from notes you never read. Say what the thing is in plain words.
